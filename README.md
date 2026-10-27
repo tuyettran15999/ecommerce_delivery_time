@@ -1,17 +1,15 @@
-# Weather Project: Seattle vs Boston
+# E-commerce Delivery Time
 
-> This project compares precipitation in Seattle, WA and Boston, MA from January 1, 2018 to December 31, 2022.
+> This project answers the question: What factors influence e-commerce delivery times, and how accurately can machine learning models predict the number of days required to deliver an order?
 
 ---
 
 ## Project Overview
 
-This project compares precipitation patterns in Seattle and Boston to investigate whether it rains more in Seattle. The project uses historical daily precipitation data from both cities from 2018 to 2022.
+This project compares
 
-The analysis shows that whether Seattle is rainier than Boston depends on how precipitation is measured. Seattle experiences precipitation more frequently, while Boston tends to receive more precipitation when precipitation occurs and generally has higher total annual precipitation.
-
-- **Objective:** Determine whether Seattle receives more rainfall than Boston.
-- **Domain:** Weather Analytics
+- **Objective:** 
+- **Domain:** 
 - **Key Techniques:** Data collection, Data processing, Exploratory data analysis, Statistical hypothesis testing
 
 ---
@@ -30,8 +28,8 @@ The analysis shows that whether Seattle is rainier than Boston depends on how pr
 
 ## Data
 
-- **Source:** https://www.ncei.noaa.gov/cdo-web/search?datasetid=GHCND
-- **Description:** Historical daily precipitation data for Seattle, WA and Boston, MA from January 1, 2018 to December 31, 2022.
+- **Source:** https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce/data?select=olist_products_dataset.csv
+- **Description:** 
 
 The raw datasets used in the project are located in the `data/raw/` folder.
 
@@ -52,26 +50,22 @@ The data analysis used the data science methodology. Here are main steps include
 - Compare the mean amount of precipitation on days when precipitation occurred.
 - Perform statistical hypothesis tests to determine whether monthly differences in precipitation amount and frequency were statistically significant.
 
-The Jupyter notebook used to clean and analyze the data is: `code/Weather_Data.ipynb`
-The cleaned data file is: `data/processed/clean_seattle_boston_weather.csv`
+The Jupyter notebook used to clean and analyze the data is: `code/.ipynb`
+The cleaned data file is: `data/processed/.csv`
 
 ---
 
 ## Results
 
-The results show that whether Seattle receives more precipitation than Boston depends on how precipitation is measured.
 
-Seattle has precipitation more frequently, particularly during the winter months. However, Boston has more precipitation on average on days when precipitation occurs and generally has higher total annual precipitation. Boston also experiences more extreme daily precipitation events.
-
-Overall, Seattle is rainier in terms of precipitation frequency, while Boston tends to have heavier and greater precipitation. Statistical tests also identified significant differences in precipitation amount and frequency between the two cities during several months of the year.
-
-The document communicating the results of this project is: `reports/Weather_Project_Report.pdf`
+The document communicating the results of this project is: `reports/.pdf`
 
 ---
 
 ## Authors
 
 - Krystal Tran[](https://github.com/tuyettran15999)
+- 
 
 ---
 
