@@ -22,9 +22,9 @@ Two cleaned tables support different levels of analysis:
 | Dataset | Unit of observation | Main use |
 | --- | --- | --- |
 | `data/processed/clean_orders.csv` | One row per order (`order_id`) | Order-level EDA and the planned modeling dataset |
-| `data/processed/clean_order_items.csv` | One row per order item (`order_id`, `order_item_id`) | Product, category, and seller exploration; feature engineering |
+| `data/processed/clean_order_items.csv` | One row per order–product–seller (`order_id`, `product_id`, `seller_id`), with `qty` | Product, category, and seller exploration; feature engineering |
 
-Order-level values and delivery times repeat across items in the item table. Use `clean_orders.csv` for order-level totals and average delivery times to avoid counting an order more than once.
+Order-level totals, customer location and delivery times are stored in `clean_orders.csv`. The grouped item table stores quantity, unit price, line item value, line shipping fee, product/seller details and precomputed distance. It retains only customer_id and customer_unique_id as customer attributes. Join selected order attributes by order_id when needed for EDA; count each order once for order-level statistics.
 
 ## Project Structure
 
@@ -60,9 +60,11 @@ Missing category, product measurement, coordinate, and delivery-date values are 
 
 - **`delivery_time_days`:** Actual customer delivery timestamp minus purchase timestamp, expressed in fractional days.
 - **`delivery_delay_days`:** Actual delivery date minus estimated delivery date, using calendar dates. Positive means late, zero means the same date, and negative means early.
-- **`total_order_value`:** Sum of item prices plus freight charges.
+- **`item_value`:** Sum of item prices per order (BRL).
+- **`shipping_fee`:** Sum of freight charges per order (BRL).
+- **`total_order_value`:** `item_value + shipping_fee`, rounded to two decimal places.
 - **`payment_total`:** Sum of payment records per order, kept separately from total order value.
-- **`item_count`, `product_count`, `seller_count`:** Number of items, distinct products, and distinct sellers per order.
+- **`total_qty`, `product_count`, `seller_count`:** Number of items, distinct products, and distinct sellers per order.
 
 ## Completed EDA
 
@@ -105,3 +107,12 @@ Planned comparisons:
 
 - Olist for the public dataset.
 - This project was developed for the Foundations of Data Science course at Seattle University.
+## Prepared EDA Features
+
+Distance (miles), weight summaries (pounds/lb), volume summaries (in³), purchase-time features, item-level category information are generated in `data_preparation.ipynb` and included in the cleaned tables. See [EDA_FEATURES.md](EDA_FEATURES.md) for definitions, units and missing-data rules. EDA uses the prepared distance columns instead of recomputing them.
+
+Exported tables omit selected helper quality flags/counts for readability; the checks remain in preparation. Purchase-time columns follow order_status.
+
+Dimensions are converted from raw centimeters using inches = cm / 2.54. Volume is computed from the three inch dimensions (equivalently cm³ / 16.387064). Weight remains in pounds (lb). Raw Olist data retain their original units.
+
+Grouped item lines preserve all 112,650 source units as 102,425 order–product–seller rows. `line_item_value` and `line_shipping_fee` are sums; product weight/volume describe one unit, while `line_weight_lb` and `line_product_volume_in3` include qty. Unit price is validated as constant within each group.
